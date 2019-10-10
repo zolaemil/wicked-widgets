@@ -1,5 +1,6 @@
 const fs = require('fs');
-// store.json
+const uuid = require('uuid');
+
 const store = JSON.parse(fs.readFileSync('./store.json'));
 
 module.exports = {
@@ -7,9 +8,11 @@ module.exports = {
     return store[id];
   },
   add(obj) {
-    // generate the id!!
-    store[obj.id] = obj;
+    const id = uuid.v1();
+    store[id] = { id, ...obj };
+
     fs.writeFileSync('./store.json', JSON.stringify(store, null, 2));
-    return
+
+    return store[id];
   }
 }

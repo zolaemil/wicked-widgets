@@ -4,14 +4,12 @@ module.exports = {
   getAll: (req, res) => {},
   getOne: (req, res) => {
     const widget = store.findById(req.params.id);
-    console.log(store);
-    console.log(store.findById);
-    console.log(widget);
+
     res.send(widget);
   },
   post: (req, res) => {
-    // create for real!
-    res.send(req.body);
+    const widget = store.add(req.body);
+    res.send(widget);
   },
   put: (req, res) => {},
   del: (req, res) => {},

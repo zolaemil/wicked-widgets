@@ -1,5 +1,6 @@
 jest.mock('../store');
 const mockStore = require('../store');
+const uuid = require('uuid');
 
 const {
   post: postHandler,
@@ -63,16 +64,17 @@ describe('Widget API', () => {
       const mockRequest = {
         body: payload,
       }
+
+      const fakeWidget = { id: uuid.v4(), ...payload};
+      mockStore.add.mockReturnValue(fakeWidget);
+
       const mockResponse = {
         send: jest.fn(),
       };
 
       postHandler(mockRequest, mockResponse);
-      // const expextedOutputPayload = { ...payload };
 
-      expect(mockResponse.send.mock.calls[0][0]).toEqual(payload);
-
-      // assert that it returns a new object
+      expect(mockResponse.send.mock.calls[0][0]).toEqual(fakeWidget);
     });
   });
 });
