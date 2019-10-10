@@ -11,12 +11,13 @@ module.exports = {
     res.send(widget);
   },
   post: (req, res) => {
+    console.log('post', req.body);
     const widget = store.add(req.body);
     res.send(widget);
   },
 
   update: (req, res) => {
-    const widget = store.update(req.params.id, req.params.body);
+    const widget = store.update(req.params.id, req.body);
     if (!widget) {
       return res.status(404).send('No such widget');
     }

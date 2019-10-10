@@ -21,11 +21,16 @@ module.exports = {
     if (!obj) retrun;
 
     const updatedObj = { ...obj, ...patch };
+    console.log('store.update', updatedObj);
     store[id] = updatedObj;
+
+    fs.writeFileSync('./store.json', JSON.stringify(store, null, 2));
 
     return updatedObj;
   },
   delete(id) {
     delete store[id];
+
+    fs.writeFileSync('./store.json', JSON.stringify(store, null, 2));
   }
 }
