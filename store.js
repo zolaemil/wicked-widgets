@@ -14,5 +14,15 @@ module.exports = {
     fs.writeFileSync('./store.json', JSON.stringify(store, null, 2));
 
     return store[id];
+  },
+  update(id, patch) {
+    const obj = store[id];
+
+    if (!obj) retrun;
+
+    const updatedObj = { ...obj, ...patch };
+    store[id] = updatedObj;
+
+    return updatedObj;
   }
 }
