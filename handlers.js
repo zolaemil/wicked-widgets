@@ -23,5 +23,8 @@ module.exports = {
 
     res.send(widget);
   },
-  del: (req, res) => {},
+  del: (req, res) => {
+    store.delete(req.params.id);
+    res.status(204).send();
+  },
 };

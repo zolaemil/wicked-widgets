@@ -6,6 +6,7 @@ const {
   post: postHandler,
   getOne: getOneHandler,
   update: patchHandler,
+  del: deleteHandler,
 } = require('../handlers');
 
 describe('Widget API', () => {
@@ -157,6 +158,25 @@ describe('Widget API', () => {
       postHandler(mockRequest, mockResponse);
 
       expect(mockResponse.send.mock.calls[0][0]).toEqual(fakeWidget);
+    });
+  });
+
+  describe('DELETE /widgets/:id', () => {
+    test('deletes the widget', () => {
+      const mockRequest = {
+        params: uuid.v4(),
+      };
+
+      const mockSend = jest.fn();
+      const mockStatus = jest.fn().mockReturnValue({ send: mockSend });
+      const mockResponse = {
+        status: mockStatus,
+      };
+
+      deleteHandler(mockRequest, mockResponse);
+
+      expect(mockStatus.mock.calls[0][0]).toEqual(204);
+      expect(mockSend.mock.calls[0][0]).toEqual(undefined);
     });
   });
 });

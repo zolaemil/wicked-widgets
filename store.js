@@ -24,5 +24,8 @@ module.exports = {
     store[id] = updatedObj;
 
     return updatedObj;
+  },
+  delete(id) {
+    delete store[id];
   }
 }
