@@ -1,10 +1,13 @@
+jest.mock('../store');
+const mockStore = require('../store');
+
 const {
   post: postHandler,
   getOne: getOneHandler,
 } = require('../handlers');
 
 describe('Widget API', () => {
-  describe.skip('GET /widgets/:id', () => {
+  describe('GET /widgets/:id', () => {
     test('returns the widget - assuming it exists', () => {
       const mockRequest = {
         params: {
@@ -27,7 +30,7 @@ describe('Widget API', () => {
         welcomeMessage: 'Bar',
       };
 
-      jest.mock('../store');
+      mockStore.findById.mockReturnValue(fakeWidget);
 
       const mockResponse = {
         send: jest.fn(),
